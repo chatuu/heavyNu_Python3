@@ -1,0 +1,6 @@
+PWD /Users/chatuu/Documents/cohjpsi_mumu_full-program/python/outputs
+INPUT /usr/local/texlive/2016/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2016/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT zeroth_norms.tex
+OUTPUT zeroth_norms.log
