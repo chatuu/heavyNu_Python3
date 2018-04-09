@@ -1,3 +1,3 @@
-from functions import print_zeroth_norms
+from functions import timestamp
 
-print_zeroth_norms()
+timestamp('start')

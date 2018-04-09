@@ -229,7 +229,7 @@ usecorrZeta = 0
 #-------------------------------------------
 # Plotting switches:
 
-detsw = [0] * 5
+detsw = {}
 
 # Set detector sections on / off
 detsw[1] = 1  # DC
@@ -240,7 +240,7 @@ detsw[4] = 0  # Upstream
 #-------------------------------------------
 # Set ncand types on / off
 
-ncndsw = [0] * 5
+ncndsw = {}
 
 ncndsw[1] = 1  # ncand = 2
 ncndsw[2] = 0  # ncand = 3
@@ -250,7 +250,7 @@ ncndsw[4] = 0  # ncand = {3][ 4}
 #-------------------------------------------
 # Set event topologies on / off
 
-evtsw = [0] * 5
+evtsw = {}
 
 evtsw[1] = 0  # CC - DIS
 evtsw[2] = 1  # OS DiMu
@@ -258,9 +258,9 @@ evtsw[3] = 0  # LS DiMu
 evtsw[4] = 0  # OS Mu + X
 #-------------------------------------------
 # Initialize Post - cut histogram switches:
-cuthists = [0] * (ncuts + 1)
+cuthists = {}
 
-for ii in range(1,ncuts):
+for ii in range(1, ncuts):
     cuthists[ii] = 0
 
 cuthists[ncuts] = 1  # Plot after last cut
@@ -281,7 +281,7 @@ ncuthists = sum(cuthists)
 #-------------------------------------------
 
 # To run or not to run:
-runtype = [0] * (nmc + 1)
+runtype = {}
 
 runtype[0] = 0  # - - > Data
 runtype[1] = 1  # - - > CC - DIS
@@ -322,7 +322,7 @@ runtype[24] = 1  # - - > CohPi-
 '''
 
 
-gtyp = [0] * (nmc + 1)
+gtyp = {}
 
 gtyp[0] = 3  # - - > Data[all choices identical]
 gtyp[1] = 3  # - - > CC - DIS
@@ -354,7 +354,7 @@ gtyp[24] = 1  # - - > CohPi - Allthough it's Calisto Standard / sm
 #= == == == == == == == == == == == == == == ==
 # Table Type Tags
 
-ttag = [0] * (nmc + 1)
+ttag = {}
 
 ttag[0] = ' Data   '
 ttag[1] = ' CCDIS  '
@@ -396,143 +396,134 @@ ttag[24] = ' CohPi- '
 #  *****************---------------------------------****************
 #  ------------------------------------------------------------------
 
-gennt={}
+gennt = {}
 
 # CCDIS:
-gennt[1,1] = 1.67094362e6  # - - > [NUAGE]
-gennt[1,2] = 4.4777175e6  # - -- > [NEGLIB]
-gennt[1,3] = 4.116629e6  # - --- > [GENIE]
+gennt[1, 1] = 1.67094362e6  # - - > [NUAGE]
+gennt[1, 2] = 4.4777175e6  # - -- > [NEGLIB]
+gennt[1, 3] = 4.116629e6  # - --- > [GENIE]
 
 #------------------------------------------------------------------
 # NCDIS:
-gennt[2,1] = 1.34534462e6  # - - > [NUAGE]
-gennt[2,2] = 3.2419925e6  # - -- > [NEGLIB]
-gennt[2,3] = 2.45185225e6  # - - > [GENIE]
+gennt[2, 1] = 1.34534462e6  # - - > [NUAGE]
+gennt[2, 2] = 3.2419925e6  # - -- > [NEGLIB]
+gennt[2, 3] = 2.45185225e6  # - - > [GENIE]
 
 #------------------------------------------------------------------
 # CohJ / Psi[My NEGLIB / Nuage - reader]:
-gennt[3,1] = 337363.344
-gennt[3,2] = 337363.344
-gennt[3,3] = 337363.344
+gennt[3, 1] = 337363.344
+gennt[3, 2] = 337363.344
+gennt[3, 3] = 337363.344
 #------------------------------------------------------------------
 # OBG[from data]:
-gennt[4,1] = 1.0
-gennt[4,2] = 1.0
-gennt[4,3] = 1.0
+gennt[4, 1] = 1.0
+gennt[4, 2] = 1.0
+gennt[4, 3] = 1.0
 #------------------------------------------------------------------
 # CohPi + :
 #  -- RS Model: --
-gennt[5,1] = 362605.312  # - --- > [NUAGE]
-gennt[5,2] = 412962.812  # - --- > [NEGLIB]
+gennt[5, 1] = 362605.312  # - --- > [NUAGE]
+gennt[5, 2] = 412962.812  # - --- > [NEGLIB]
 # -- BK Model: --
-gennt[5,1] = 406748.031  # - - > [NUAGE]
-gennt[5,3] = 824186.438  # --- > GENIE][BK?]
+gennt[5, 1] = 406748.031  # - - > [NUAGE]
+gennt[5, 3] = 824186.438  # --- > GENIE][BK?]
 #  -- BS Model: --
-gennt[5,1] = 409103.781  # - - > [NUAGE]
+gennt[5, 1] = 409103.781  # - - > [NUAGE]
 #------------------------------------------------------------------
 # CohRho+ [My NEGLIB/Nuage-reader]:
 
-gennt[6,1] = 147680.422
-gennt[6,2] = 147680.422
-gennt[6,3] = 147680.422
+gennt[6, 1] = 147680.422
+gennt[6, 2] = 147680.422
+gennt[6, 3] = 147680.422
 #------------------------------------------------------------------
 # aNumu-CC:
-gennt[7,1] = 0.234835203e6  # --> [NUAGE]
-gennt[7,2] = 0.3733310e6  # ----> [NEGLIB]
-gennt[7,3] = 0.384881812e6  # --> [GENIE]
+gennt[7, 1] = 0.234835203e6  # --> [NUAGE]
+gennt[7, 2] = 0.3733310e6  # ----> [NEGLIB]
+gennt[7, 3] = 0.384881812e6  # --> [GENIE]
 #------------------------------------------------------------------
 # QE-CC:
-gennt[8,1] = 0.204318438e6  # --> [NUAGE]
-gennt[8,2] = 9.8879750e6  # -----> [NEGLIB]
-gennt[8,3] = 0.418257531e6  # ---> [GENIE]
+gennt[8, 1] = 0.204318438e6  # --> [NUAGE]
+gennt[8, 2] = 9.8879750e6  # -----> [NEGLIB]
+gennt[8, 3] = 0.418257531e6  # ---> [GENIE]
 #------------------------------------------------------------------
 # CohPi0 [no GENIE]:
 #-- RS Model: --
 
-gennt[9,1] = 529168.75  # ----> [NUAGE]
-gennt[9,2] = 38022.6055  # ---> [NEGLIB]
+gennt[9, 1] = 529168.75  # ----> [NUAGE]
+gennt[9, 2] = 38022.6055  # ---> [NEGLIB]
 #-- BK Model: --
-gennt[9,1] = 179844.781  # --> [NUAGE]
+gennt[9, 1] = 179844.781  # --> [NUAGE]
 #-- BS Model: --
-gennt[9,1] = 23723.3262  # --> [NUAGE]
+gennt[9, 1] = 23723.3262  # --> [NUAGE]
 # Use NUAGE BK for GENIE default:
-gennt[9,3] = 179844.781  # ----> [NUAGE]
+gennt[9, 3] = 179844.781  # ----> [NUAGE]
 #------------------------------------------------------------------
 # Nue-CC:
-gennt[10,1] = 0.173752453e6  # --> [NUAGE]
-gennt[10,2] = 0.425471188e6  # --> [NEGLIB]
-gennt[10,3] = 0.396271906e6  # --> [GENIE]
+gennt[10, 1] = 0.173752453e6  # --> [NUAGE]
+gennt[10, 2] = 0.425471188e6  # --> [NEGLIB]
+gennt[10, 3] = 0.396271906e6  # --> [GENIE]
 #------------------------------------------------------------------
 # aNue-CC:
-gennt[11,1] = 0.104198117e6  # --> [NUAGE]
-gennt[11,2] = 0.183138078e6  # --> [NEGLIB]
-gennt[11,3] = 0.193616453e6  # --> [GENIE]
+gennt[11, 1] = 0.104198117e6  # --> [NUAGE]
+gennt[11, 2] = 0.183138078e6  # --> [NEGLIB]
+gennt[11, 3] = 0.193616453e6  # --> [GENIE]
 #------------------------------------------------------------------
 # aNumu-NC:
-gennt[12,1] = 0.091272578e6  # --> [NUAGE]
-gennt[12,2] = 0.184929312e6  # --> [NEGLIB]
-gennt[12,3] = 0.189598922e6  # --> [GENIE]
+gennt[12, 1] = 0.091272578e6  # --> [NUAGE]
+gennt[12, 2] = 0.184929312e6  # --> [NEGLIB]
+gennt[12, 3] = 0.189598922e6  # --> [GENIE]
 #------------------------------------------------------------------
 # CohRho0 [My NEGLIB/Nuage-reader]
-gennt[13,1] = 25235.83
-gennt[13,2] = 25235.83
-gennt[13,3] = 25235.83
+gennt[13, 1] = 25235.83
+gennt[13, 2] = 25235.83
+gennt[13, 3] = 25235.83
 #------------------------------------------------------------------
 # Res-CC:
-gennt[14,1] = 0.0863934e6  # ----> [NUAGE]
-gennt[14,2] = 5.600115e6  # ----> [NEGLIB]
-gennt[14,3] = 0.934139812e6  # --> [GENIE]
+gennt[14, 1] = 0.0863934e6  # ----> [NUAGE]
+gennt[14, 2] = 5.600115e6  # ----> [NEGLIB]
+gennt[14, 3] = 0.934139812e6  # --> [GENIE]
 #------------------------------------------------------------------
 # CohPhi0 [My NEGLIB/Nuage-reader]
-gennt[15,1] = 4075.93
-gennt[15,2] = 4075.93
-gennt[15,3] = 4075.93
+gennt[15, 1] = 4075.93
+gennt[15, 2] = 4075.93
+gennt[15, 3] = 4075.93
 #------------------------------------------------------------------
 # Heavy Neutrino Analysis:
-gennt[16,1] = 4500.00
-gennt[16,2] = 4500.00
-gennt[16,3] = 4500.00
+gennt[16, 1] = 4500.00
+gennt[16, 2] = 4500.00
+gennt[16, 3] = 4500.00
 
-gennt[17,1] = 4500.00
-gennt[17,2] = 4500.00
-gennt[17,3] = 4500.00
+gennt[17, 1] = 4500.00
+gennt[17, 2] = 4500.00
+gennt[17, 3] = 4500.00
 
-gennt[18,1] = 4500.00
-gennt[18,2] = 4500.00
-gennt[18,3] = 4500.00
+gennt[18, 1] = 4500.00
+gennt[18, 2] = 4500.00
+gennt[18, 3] = 4500.00
 
-gennt[19,1] = 4500.00
-gennt[19,2] = 4500.00
-gennt[19,3] = 4500.00
+gennt[19, 1] = 4500.00
+gennt[19, 2] = 4500.00
+gennt[19, 3] = 4500.00
 
-gennt[20,1] = 4500.00
-gennt[20,2] = 4500.00
-gennt[20,3] = 4500.00
+gennt[20, 1] = 4500.00
+gennt[20, 2] = 4500.00
+gennt[20, 3] = 4500.00
 
-gennt[21,1] = 4500.00
-gennt[21,2] = 4500.00
-gennt[21,3] = 4500.00
+gennt[21, 1] = 4500.00
+gennt[21, 2] = 4500.00
+gennt[21, 3] = 4500.00
 
-gennt[22,1] = 4500.00
-gennt[22,2] = 4500.00
-gennt[22,3] = 4500.00
+gennt[22, 1] = 4500.00
+gennt[22, 2] = 4500.00
+gennt[22, 3] = 4500.00
 
-gennt[23,1] = 4500.00
-gennt[23,2] = 4500.00
-gennt[23,3] = 4500.00
+gennt[23, 1] = 4500.00
+gennt[23, 2] = 4500.00
+gennt[23, 3] = 4500.00
 
-gennt[24,1] = 824186.438
-gennt[24,2] = 824186.438
-gennt[24,3] = 824186.438
-
-
-
-
-
-
-
-
-
+gennt[24, 1] = 824186.438
+gennt[24, 2] = 824186.438
+gennt[24, 3] = 824186.438
 
 
 #  ------------------------------------------------------------------
@@ -547,11 +538,11 @@ gennt[24,3] = 824186.438
 '''
 # do ii=1][nmc
 
-for ii in range(1,nmc + 1):
-    gennt[ii,4] = gennt[ii,1] + gennt[ii,2]  # Nuage+Neglib
-    gennt[ii,5] = gennt[ii,1] + gennt[ii,3]  # Nuage+Genie
-    gennt[ii,6] = gennt[ii,2] + gennt[ii,3]  # Neglib+Genie
-    gennt[ii,7] = gennt[ii,1] + gennt[ii,2] + gennt[ii,3]  # All 3
+for ii in range(1, nmc + 1):
+    gennt[ii, 4] = gennt[ii, 1] + gennt[ii, 2]  # Nuage+Neglib
+    gennt[ii, 5] = gennt[ii, 1] + gennt[ii, 3]  # Nuage+Genie
+    gennt[ii, 6] = gennt[ii, 2] + gennt[ii, 3]  # Neglib+Genie
+    gennt[ii, 7] = gennt[ii, 1] + gennt[ii, 2] + gennt[ii, 3]  # All 3
 
     # ------------------------------------------------------------------
     #*****************---------------------------------****************
@@ -564,38 +555,38 @@ for ii in range(1,nmc + 1):
 
 #    print(str(gennt))
 
-norm ={}
+norm = {}
 
-norm[0,0] = 1.0  # --------------------> Data
-norm[0,1] = 1.44e6  # -------------------> CCDIS
-norm[0,2] = (0.38 * 1.44e6)  # ----------> NC
-norm[0,3] = (500.0 * 0.0593)  # -------> CohJ/Psi-mumu
-norm[0,4] = 1.0  # --------------------> OBG (From Data]
-norm[0,5] = 10000.0  # ----------------> CohPi+
-norm[0,6] = (1000.0 / 0.1355)  # CohRho+ (sin2=0.2397-->0.1355]
-norm[0,7] = (1.44e6 * 0.025)  # ---------> aNumu-CC
-norm[0,8] = 32000.0  # ----------------> QE-CC
-norm[0,9] = 5000.0  # ----------------> CohPi0
-norm[0,10] = (1.44e6 * 0.015)  # ----------> Nue-CC
-norm[0,11] = (1.44e6 * 0.0015)  # ---------> aNue-CC
-norm[0,12] = (0.38 * 1.44e6 * 0.025)  # --> aNumu-NC
-norm[0,13] = 1000.0  # ----------------> CohRho0
-norm[0,14] = (1.44e6 * 0.035)  # --------> Res-CC
-norm[0,15] = 200.0  # -----------------> CohPhi0
-norm[0,16] = 100.0  # -----------------> Heavy Neutrino
-norm[0,17] = 100.0  # -----------------> Heavy Neutrino
-norm[0,18] = 100.0  # -----------------> Heavy Neutrino
-norm[0,19] = 100.0  # -----------------> Heavy Neutrino
-norm[0,20] = 100.0  # -----------------> Heavy Neutrino
-norm[0,21] = 100.0  # -----------------> Heavy Neutrino
-norm[0,22] = 100.0  # -----------------> Heavy Neutrino
-norm[0,23] = 100.0  # -----------------> Heavy Neutrino
-norm[0,24] = 2000.0  # -----------------> CohPi-
+norm[0, 0] = 1.0  # --------------------> Data
+norm[0, 1] = 1.44e6  # -------------------> CCDIS
+norm[0, 2] = (0.38 * 1.44e6)  # ----------> NC
+norm[0, 3] = (500.0 * 0.0593)  # -------> CohJ/Psi-mumu
+norm[0, 4] = 1.0  # --------------------> OBG (From Data]
+norm[0, 5] = 10000.0  # ----------------> CohPi+
+norm[0, 6] = (1000.0 / 0.1355)  # CohRho+ (sin2=0.2397-->0.1355]
+norm[0, 7] = (1.44e6 * 0.025)  # ---------> aNumu-CC
+norm[0, 8] = 32000.0  # ----------------> QE-CC
+norm[0, 9] = 5000.0  # ----------------> CohPi0
+norm[0, 10] = (1.44e6 * 0.015)  # ----------> Nue-CC
+norm[0, 11] = (1.44e6 * 0.0015)  # ---------> aNue-CC
+norm[0, 12] = (0.38 * 1.44e6 * 0.025)  # --> aNumu-NC
+norm[0, 13] = 1000.0  # ----------------> CohRho0
+norm[0, 14] = (1.44e6 * 0.035)  # --------> Res-CC
+norm[0, 15] = 200.0  # -----------------> CohPhi0
+norm[0, 16] = 100.0  # -----------------> Heavy Neutrino
+norm[0, 17] = 100.0  # -----------------> Heavy Neutrino
+norm[0, 18] = 100.0  # -----------------> Heavy Neutrino
+norm[0, 19] = 100.0  # -----------------> Heavy Neutrino
+norm[0, 20] = 100.0  # -----------------> Heavy Neutrino
+norm[0, 21] = 100.0  # -----------------> Heavy Neutrino
+norm[0, 22] = 100.0  # -----------------> Heavy Neutrino
+norm[0, 23] = 100.0  # -----------------> Heavy Neutrino
+norm[0, 24] = 2000.0  # -----------------> CohPi-
 
 #print('Test= '+str(gennt[1][3]))
 
 # Print normalization settings to .tex file before scaling
-print_zeroth_norms(nmc,nttypobg,ttag,gtyp,norm,ntyp,gennt)
+print_zeroth_norms(nmc, nttypobg, ttag, gtyp, norm, ntyp, gennt)
 # Set zeroth normalization based on generated events in NT:
 #        do ii=1][nmc
 #         norm(0][ii) = norm(0][ii)/gennt(ii][gtyp(ii))
@@ -606,45 +597,43 @@ print_zeroth_norms(nmc,nttypobg,ttag,gtyp,norm,ntyp,gennt)
 #*******************************************************
 #****************----  Final Norms  ----****************
 #****************-----------------------****************
-norm[1,0] = 1.0    # Data
-norm[1,1] = 1.0    # CC
-norm[1,2] = 1.0  # NC
-norm[1,3] = 1.0  # CohJ/Psi
-norm[1,4] = 0.22  # From CohRho analysis  OBG [non Ph2Mu]
-norm[1,5] = 0.985  # CohPi+ [from 2v0 pi0 analysis]
-norm[1,6] = 0.669  # CohRho+ from CohRho0 measurement
-norm[1,7] = 1.0  # Anumu-CC
-norm[1,8] = 1.0  # QE
-norm[1,9] = 0.985  # CohPi0 [from 2v0 analysis]
-norm[1,10] = 1.0  # Nue-CC
-norm[1,11] = 1.0  # Anue-CC
-norm[1,12] = 1.0  # Anumu-NC
-norm[1,13] = 0.669  # CohRho0 [from measurement]
-norm[1,14] = 1.0  # Res-CC
-norm[1,15] = 1.0  # CohP
-norm[1,16] = 1.0  # Heavy Neutrino
-norm[1,17] = 1.0  # Heavy Neutrino
-norm[1,18] = 1.0  # Heavy Neutrino
-norm[1,19] = 1.0  # Heavy Neutrino
-norm[1,20] = 1.0  # Heavy Neutrino
-norm[1,21] = 1.0  # Heavy Neutrino
-norm[1,22] = 1.0  # Heavy Neutrino
-norm[1,23] = 1.0  # Heavy Neutrino
-norm[1,24] = 1.0  # CohPi-
+norm[1, 0] = 1.0    # Data
+norm[1, 1] = 1.0    # CC
+norm[1, 2] = 1.0  # NC
+norm[1, 3] = 1.0  # CohJ/Psi
+norm[1, 4] = 0.22  # From CohRho analysis  OBG [non Ph2Mu]
+norm[1, 5] = 0.985  # CohPi+ [from 2v0 pi0 analysis]
+norm[1, 6] = 0.669  # CohRho+ from CohRho0 measurement
+norm[1, 7] = 1.0  # Anumu-CC
+norm[1, 8] = 1.0  # QE
+norm[1, 9] = 0.985  # CohPi0 [from 2v0 analysis]
+norm[1, 10] = 1.0  # Nue-CC
+norm[1, 11] = 1.0  # Anue-CC
+norm[1, 12] = 1.0  # Anumu-NC
+norm[1, 13] = 0.669  # CohRho0 [from measurement]
+norm[1, 14] = 1.0  # Res-CC
+norm[1, 15] = 1.0  # CohP
+norm[1, 16] = 1.0  # Heavy Neutrino
+norm[1, 17] = 1.0  # Heavy Neutrino
+norm[1, 18] = 1.0  # Heavy Neutrino
+norm[1, 19] = 1.0  # Heavy Neutrino
+norm[1, 20] = 1.0  # Heavy Neutrino
+norm[1, 21] = 1.0  # Heavy Neutrino
+norm[1, 22] = 1.0  # Heavy Neutrino
+norm[1, 23] = 1.0  # Heavy Neutrino
+norm[1, 24] = 1.0  # CohPi-
 
-'''         # Apply normalizations:
-        do ii=1][nmc
-         norm(1][ii)=norm(1][ii)*norm(0][ii)
-        enddo
-       #****************-----------------------****************
-       #*******************************************************
+# Apply normalizations:
 
+for ii in range(1, nmc + 1):
+    norm[1, ii] = norm[1, ii] * norm[0, ii]
 
+    #****************-----------------------****************
+    #*******************************************************
 
-         #|--------------------------------------------------|
-         #|--------------------------------------------------|
-         #| Set Datacard Locations (Full NTs):               |
-'''  # |
+    #|--------------------------------------------------|
+    #|--------------------------------------------------|
+    #| Set Datacard Locations (Full NTs):               |
 
 
 '''    This section sets datacard filenames. If "drep" |
@@ -665,181 +654,180 @@ norm[1,24] = 1.0  # CohPi-
 '''
 
 
-'''
-dstr[0] ='datafull   '        #|
+dstr = {}
+drep = {}
+
+dstr[0] = 'datafull'  # |
 drep[0] = 1
-dstr[1] ='ccfull     '        #|
+dstr[1] = 'ccfull'  # |
 drep[1] = 0
-dstr[2] ='ncfull     '        #|
+dstr[2] = 'ncfull'  # |
 drep[2] = 0
-dstr[3] ='jpsi-mumu  '        #|
+dstr[3] = 'jpsi-mumu'  # |
 drep[3] = 1
-dstr[4] ='obgfull    '        #|
+dstr[4] = 'obgfull'  # |
 drep[4] = 1
-dstr[5] ='cohpip     '    # [Special][ set below]    #|
+dstr[5] = 'cohpip'    # [Special][ set below]    #|
 drep[5] = 1
-dstr[6] ='cohrhop    '        #|
+dstr[6] = 'cohrhop'  # |
 drep[6] = 1
-dstr[7] ='anmcc      '        #|
+dstr[7] = 'anmcc'  # |
 drep[7] = 0
-dstr[8] ='qecc       '        #|
+dstr[8] = 'qecc'  # |
 drep[8] = 0
-dstr[9] ='cohpi0     '    # [Special][ set below]    #|
+dstr[9] = 'cohpi0'    # [Special][ set below]    #|
 drep[9] = 1
-dstr[10]='nuecc      '        #|
-drep[10]= 0
-dstr[11]='anecc      '        #|
-drep[11]= 0
-dstr[12]='anmnc      '        #|
-drep[12]= 0
-dstr[13]='cohrho0    '        #|
-drep[13]= 1
-dstr[14]='rescc      '        #|
-drep[14]= 0
-dstr[15]='cohphi0    '        #|
-drep[15]= 1
-dstr[16]='Hnu_0.250  '
-drep[16]= 1
-dstr[17]='Hnu_0.350  '
-drep[17]= 1
-dstr[18]='Hnu_0.500  '
-drep[18]= 1
-dstr[19]='Hnu_1.000  '
-drep[19]= 1
-dstr[20]='Hnu_1.500  '
-drep[20]= 1
-dstr[21]='Hnu_2.000  '
-drep[21]= 1
-dstr[22]='Hnu_3.000  '
-drep[22]= 1
-dstr[23]='Hnu_4.000  '
-drep[23]= 1
-dstr[24]='cohpimin   '
-drep[25]=1
+dstr[10] = 'nuecc'  # |
+drep[10] = 0
+dstr[11] = 'anecc'  # |
+drep[11] = 0
+dstr[12] = 'anmnc'  # |
+drep[12] = 0
+dstr[13] = 'cohrho0'  # |
+drep[13] = 1
+dstr[14] = 'rescc'  # |
+drep[14] = 0
+dstr[15] = 'cohphi0'  # |
+drep[15] = 1
+dstr[16] = 'Hnu_0.250'
+drep[16] = 1
+dstr[17] = 'Hnu_0.350'
+drep[17] = 1
+dstr[18] = 'Hnu_0.500'
+drep[18] = 1
+dstr[19] = 'Hnu_1.000'
+drep[19] = 1
+dstr[20] = 'Hnu_1.500'
+drep[20] = 1
+dstr[21] = 'Hnu_2.000'
+drep[21] = 1
+dstr[22] = 'Hnu_3.000'
+drep[22] = 1
+dstr[23] = 'Hnu_4.000'
+drep[23] = 1
+dstr[24] = 'cohpimin'
+drep[24] = 1
 
- Set MC type strings:
-dtyp[1]='nua' #--> NUAGE
-dtyp[2]='neg' #--> NEGLIB
-dtyp[3]='gen' #--> GENIE
-dtyp[4]='nn' #--> NUAGE + NEGLIB
-dtyp[5]='ng' #--> NUAGE + GENIE
-dtyp[6]='gn' #--> NEGLIB + GENIE
-dtyp[7]='nng' #--> NUAGE + NEGLIB + GENIE
+# Set MC type strings:
 
-           Make standardized set of names:                  #|
-          do ii=0][nmc                                       #|
-           ldstr=LEN_TRIM(dstr(ii))                         #|
-           do jj=1][ntyp                                     #|
-            if(drep(ii).eq.0) then                          #|
-            dname(ii][jj)=dstr(ii)(1:ldstr)//dtyp(jj)        #|
-            elseif(drep(ii).eq.1) then                      #|
-            dname(ii][jj)=dstr(ii)(1:ldstr)                  #|
-            endif                                           #|
-           enddo                                            #|
-          enddo                                             #|
-                                                            #|
-           Modify special cases:
-         # ..................................................|
-           CohPi+:                                          |
-             -- RS Model: --                                |
-cc            dname(5][1) ='cohpipnuars'  #(NUAGE)              |
-            dname(5][2) ='cohpipnegrs'  #(NEGLIB)             |
-            dname(5][3) ='cohpipgen  '  #(GENIE)              |
-             -- BK Model: --                                |
-cc            dname(5][1) ='cohpipnuabk'  #(NUAGE)            |
-             -- BS Model: --                                |
-            dname(5][1) ='cohpipnuabs'  #(NUAGE)            |
-            do ii=4][ntyp
-            dname(5][ii)='NOT ALLOWED'
-            enddo
-         # ..................................................|
-           CohPi0 (no GENIE):                              |
-             -- RS Model: --                                |
-            dname(9][1) ='cohpi0nuars'  #(NUAGE)              |
-            dname(9][2) ='cohpi0negrs'  #(NEGLIB)             |
-             -- BK Model: --                                |
-cc            dname(9][1) ='cohpi0nuabk'  #(NUAGE)            |
-             -- BS Model: --                                |
-cc            dname(9][1) ='cohpi0nuabs'  #(NUAGE)            |
-            #Use NUAGE BK for GENIE default:                 |
-           dname(9][3) ='cohpi0nuabk'  #(NUAGE)               |
-            do ii=4][ntyp
-            dname(9][ii)='NOT ALLOWED'
-            enddo
-         # ..................................................|
-           Set full NT datacard locations:                  |
-           do ii=0][nmc                                      |
-            datacard(ii][1)='datacard/'//dname(ii][gtyp(ii))
+dtyp = {}
 
-            if(ii.eq.16) then
-            datacard(ii][1)='datacard/heavyneutrino'
-            endif
+dtyp[1] = 'nua'  # --> NUAGE
+dtyp[2] = 'neg'  # --> NEGLIB
+dtyp[3] = 'gen'  # --> GENIE
+dtyp[4] = 'nn'  # --> NUAGE + NEGLIB
+dtyp[5] = 'ng'  # --> NUAGE + GENIE
+dtyp[6] = 'gn'  # --> NEGLIB + GENIE
+dtyp[7] = 'nng'  # --> NUAGE + NEGLIB + GENIE
 
-            enddo                                          # |
-         # ..................................................|
-         # ..................................................|
+# Make standardized set of names:                  #|
 
+dname = {}
+
+for ii in range(0, nmc + 1):  # |
+    ldstr = len(dstr[ii])
+    #|
+    for jj in range(1, ntyp + 1):  # |
+        if drep[ii] == 0:  # |
+            dname[ii, jj] = dstr[ii] + '/' + dtyp[jj]  # |
+
+        elif drep[ii] == 1:  # |
+            dname[ii, jj] = dstr[ii]  # |
+
+
+# Modify special cases:
+# ..................................................|
+#  CohPi+:                                          |
+# -- RS Model: --                                |
+
+#dname[5, 1] = 'cohpipnuars'  # [NUAGE]              |
+dname[5, 2] = 'cohpipnegrs'  # [NEGLIB]             |
+dname[5, 3] = 'cohpipgen'  # [GENIE]              |
+
+#-- BK Model: --                                |
+#dname[5, 1] = 'cohpipnuabk'  # [NUAGE]            |
+#-- BS Model: --                                |
+dname[5, 1] = 'cohpipnuabs'  # [NUAGE]            |
+
+for ii in range(4, ntyp + 1):
+    dname[5, ii] = 'NOT ALLOWED'
+
+# ..................................................|
+
+# CohPi0 (no GENIE):                              |
+#-- RS Model: --                                |
+dname[9, 1] = 'cohpi0nuars'  # [NUAGE]  |
+dname[9, 2] = 'cohpi0negrs'  # [NEGLIB] |
+#  -- BK Model: --        |
+#dname[9, 1] = 'cohpi0nuabk'  # [NUAGE]|
+# -- BS Model: --        |
+#dname[9, 1] = 'cohpi0nuabs'  # [NUAGE]|
+# Use NUAGE BK for GENIE default:     |
+dname[9, 3] = 'cohpi0nuabk'  # [NUAGE]   |
+
+for ii in range(4, ntyp + 1):
+    dname[9, ii] = 'NOT ALLOWED'
+
+# ..................................................|
+# Set full NT datacard locations:                  |
+
+for ii in range(0, nmc + 1):  # |
+    datacard[ii, 1] = 'datacard/' + dname[ii, gtyp[ii]]
+    #if ii == 16:
+        #datacard[ii, 1] = 'datacard/heavyneutrino'
+
+        # ..................................................|
+        # ..................................................|
 
         # |-----------------------------------------------|
         # |-----------------------------------------------|
-        # | Set Datacard Locations (Baby NTs):            |
+        # | Set Datacard Locations [Baby NTs]:            |
         # |...............................................|
         # | Initialize locations to full ntuples:         |
-           do ii=0][nmc                           #        |
-            datacard(ii][0)=datacard(ii][1)        #        |
 
+for ii in range(0, nmc + 1):  # |
+    datacard[ii, 0] = datacard[ii, 1]  # |
+    #if ii == 16:
+        #datacard[ii, 0] = 'datacard/heavyneutrino'
 
-            if(ii.eq.16) then
-            datacard(ii][0)='datacard/heavyneutrino'
-            endif
+    for jj in range(1, ntyp + 1):  # |
+        bname[ii, jj] = dname[ii, jj]  # |
 
-            do jj=1][ntyp                           #      |
-             bname(ii][jj)=dname(ii][jj)             #      |
-            enddo                                  #      |
-           enddo                                   #      |
+# ...............................................|
+# ...............................................|
+# Set babynt name tags:
+dstr[0] = 'datababy'  # |
+dstr[0] = 'datacoil'  # -70 < zvr < 405       |
+dstr[1] = 'ccbaby'  # |
+dstr[2] = 'ncbaby'  # |
+dstr[4] = 'obgbaby'  # |
+dstr[7] = 'amccbaby'  # |
+dstr[8] = 'qeccbaby'  # |
+dstr[10] = 'neccbaby'  # |
+dstr[14] = 'resbaby'  # |
+# Make standardized set of names:     |
+for ii in range(0, nmc + 1):  # |
+    for jj in range(1, ntyp + 1):  # |
+        if dstr[ii] != bname[ii, jj]:
+            if drep[ii] == 0:  # |
+                bname[ii, jj] = dstr[ii, 1:ldstr] // dtyp[jj]  # |
+            elif drep[ii] == 1:  # |
+                bname[ii, jj] = dstr[ii, 1:ldstr]  # |
+
          # ...............................................|
          # ...............................................|
-          # Set babynt name tags:
-c          dstr(0) ='datababy   '  #                       |
-          dstr(0) ='datacoil   '   #-70 < zvr < 405       |
-          dstr(1) ='ccbaby     '   #                      |
-          dstr(2) ='ncbaby     '   #                      |
-          dstr(4) ='obgbaby    '   #                      |
-          dstr(7) ='amccbaby   '   #                      |
-          dstr(8) ='qeccbaby   '   #                      |
-          dstr(10)='neccbaby   '   #                      |
-          dstr(14)='resbaby    '   #                      |
-          # Make standardized set of names:               |
-          do ii=0][nmc                                  #  |
-           ldstr=LEN_TRIM(dstr(ii))                    #  |
-           do jj=1][ntyp                                #  |
-           if(dstr(ii)(1:ldstr) .ne.
-     |        bname(ii][jj)(1:ldstr) ) then
-            if(drep(ii).eq.0) then                     #  |
-            bname(ii][jj)=dstr(ii)(1:ldstr)//dtyp(jj)   #  |
-            elseif(drep(ii).eq.1) then                 #  |
-            bname(ii][jj)=dstr(ii)(1:ldstr)             #  |
-            endif                                      #  |
-           endif                                       #  |
-           enddo                                       #  |
-          enddo                                        #  |
-         # ...............................................|
-         # ...............................................|
-          # Set baby NT datacard locations:               |
-          do ii=0][nmc                                    # |
-           datacard(ii][0)='datacard/'//bname(ii][gtyp(ii))# |
-          if(ii.eq.16) then
-            datacard(16][0)='datacard/heavyneutrino'
-            endif
+# Set baby NT datacard locations:     |
+for ii in range(0, nmc + 1):      # |
+    datacard[ii, 0] = 'datacard/' + bname[ii, gtyp[ii]]  # |
+    #if ii == 16:
+        #datacard[16, 0] = 'datacard/heavyneutrino'
 
-          enddo                                       #   |
-         # ...............................................|
-         # ...............................................|
-
-
+        #   |
+        # ...............................................|
+        # ...............................................|
 
    # ************************************
-          # Set output histogram filenames:
+        # Set output histogram filenames:
 filetag[0] = 'cohjpsi-mumu_data   '
 filetag[1] = 'cohjpsi-mumu_ccdis  '
 filetag[2] = 'cohjpsi-mumu_ncdis  '
@@ -850,77 +838,82 @@ filetag[6] = 'cohjpsi-mumu_cohrhop'
 filetag[7] = 'cohjpsi-mumu_anumucc'
 filetag[8] = 'cohjpsi-mumu_qe     '
 filetag[9] = 'cohjpsi-mumu_cohpi0 '
-filetag[10]= 'cohjpsi-mumu_nuecc  '
-filetag[11]= 'cohjpsi-mumu_anuecc '
-filetag[12]= 'cohjpsi-mumu_anumunc'
-filetag[13]= 'cohjpsi-mumu_cohrho0'
-filetag[14]= 'cohjpsi-mumu_res    '
-filetag[15]= 'cohjpsi-mumu_cohphi0'
-filetag[16]= 'heavy_neutrino_0.250'
-filetag[17]= 'heavy_neutrino_0.350'
-filetag[18]= 'heavy_neutrino_0.500'
-filetag[19]= 'heavy_neutrino_1.000'
-filetag[20]= 'heavy_neutrino_1.500'
-filetag[21]= 'heavy_neutrino_2.000'
-filetag[22]= 'heavy_neutrino_3.000'
-filetag[23]= 'heavy_neutrino_4.000'
-filetag[24]= 'CohPi-   '
- #  ************************************
+filetag[10] = 'cohjpsi-mumu_nuecc  '
+filetag[11] = 'cohjpsi-mumu_anuecc '
+filetag[12] = 'cohjpsi-mumu_anumunc'
+filetag[13] = 'cohjpsi-mumu_cohrho0'
+filetag[14] = 'cohjpsi-mumu_res    '
+filetag[15] = 'cohjpsi-mumu_cohphi0'
+filetag[16] = 'heavy_neutrino_0.250'
+filetag[17] = 'heavy_neutrino_0.350'
+filetag[18] = 'heavy_neutrino_0.500'
+filetag[19] = 'heavy_neutrino_1.000'
+filetag[20] = 'heavy_neutrino_1.500'
+filetag[21] = 'heavy_neutrino_2.000'
+filetag[22] = 'heavy_neutrino_3.000'
+filetag[23] = 'heavy_neutrino_4.000'
+filetag[24] = 'CohPi-   '
+#  ************************************
 
-
-         #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-Screen Output Strings:
-mctyp[0]= '|===        Data           ===|'
-mctyp[1]= '|===        CCDIS          ===|'
-mctyp[2]= '|===        NCDIS          ===|'
-mctyp[3]= '|===         JPsi          ===|'
-mctyp[4]= '|===        OBG            ===|'
-mctyp[5]= '|===       CohPi+          ===|'
-mctyp[6]= '|===      CohRho+          ===|'
-mctyp[7]= '|===      aNuMu CC         ===|'
-mctyp[8]= '|===         QE            ===|'
-mctyp[9]= '|===       CohPi0          ===|'
-mctyp[10]='|===       Nue CC          ===|'
-mctyp[11]='|===      aNue CC          ===|'
-mctyp[12]='|===      aNuMu NC         ===|'
-mctyp[13]='|===      CohRho0          ===|'
-mctyp[14]='|===        Res            ===|'
-mctyp[15]='|===      CohPhi0          ===|'
-mctyp[16]='|===  HeavyNeutrino_0.250  ===|'
-mctyp[17]='|===  HeavyNeutrino_0.350  ===|'
-mctyp[18]='|===  HeavyNeutrino_0.500  ===|'
-mctyp[19]='|===  HeavyNeutrino_1.000  ===|'
-mctyp[20]='|===  HeavyNeutrino_1.500  ===|'
-mctyp[21]='|===  HeavyNeutrino_2.000  ===|'
-mctyp[22]='|===  HeavyNeutrino_3.000  ===|'
-mctyp[23]='|===  HeavyNeutrino_4.000  ===|'
-mctyp[24]='|===        CohPi-         ===|'
-
-
+#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# Screen Output Strings:
+mctyp[0] = '|===        Data           ===|'
+mctyp[1] = '|===        CCDIS          ===|'
+mctyp[2] = '|===        NCDIS          ===|'
+mctyp[3] = '|===         JPsi          ===|'
+mctyp[4] = '|===        OBG            ===|'
+mctyp[5] = '|===       CohPi+          ===|'
+mctyp[6] = '|===      CohRho+          ===|'
+mctyp[7] = '|===      aNuMu CC         ===|'
+mctyp[8] = '|===         QE            ===|'
+mctyp[9] = '|===       CohPi0          ===|'
+mctyp[10] = '|===       Nue CC          ===|'
+mctyp[11] = '|===      aNue CC          ===|'
+mctyp[12] = '|===      aNuMu NC         ===|'
+mctyp[13] = '|===      CohRho0          ===|'
+mctyp[14] = '|===        Res            ===|'
+mctyp[15] = '|===      CohPhi0          ===|'
+mctyp[16] = '|===  HeavyNeutrino_0.250  ===|'
+mctyp[17] = '|===  HeavyNeutrino_0.350  ===|'
+mctyp[18] = '|===  HeavyNeutrino_0.500  ===|'
+mctyp[19] = '|===  HeavyNeutrino_1.000  ===|'
+mctyp[20] = '|===  HeavyNeutrino_1.500  ===|'
+mctyp[21] = '|===  HeavyNeutrino_2.000  ===|'
+mctyp[22] = '|===  HeavyNeutrino_3.000  ===|'
+mctyp[23] = '|===  HeavyNeutrino_4.000  ===|'
+mctyp[24] = '|===        CohPi-         ===|'
 
 
 
-        #      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-        # -------------------------------------
-         # Set user index values for plotting:
-        # -------------------------------------
-           detidx(1) = 0  DC
-           detidx(2) = 1  Other
-           detidx(3) = 2  Coil
-           detidx(4) = 3  Upstream
-        # -------------------------------------
-           ncndidx(1) = 2  ncand = 2
-           ncndidx(2) = 3  ncand = 3
-           ncndidx(3) = 4  ncand = 4
-           ncndidx(4) = 5  ncand = {3][4}
-        # -------------------------------------
-           evtidx(1) = 0  CC DIS
-           evtidx(2) = 1  OS DiMu
-           evtidx(3) = 2  LS DiMu
-           evtidx(4) = 3  OS Mu+X
-        # -------------------------------------
+#      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+# -------------------------------------
+ # Set user index values for plotting:
+# -------------------------------------
+detidx={}
+
+detidx[1] = 0  # DC
+detidx[2] = 1  # Other
+detidx[3] = 2  # Coil
+detidx[4] = 3  # Upstream
+# -------------------------------------
+ncndidx={}
+
+ncndidx[1] = 2 # ncand = 2
+ncndidx[2] = 3 # ncand = 3
+ncndidx[3] = 4 # ncand = 4
+ncndidx[4] = 5 # ncand = {3,4}
+# -------------------------------------
+evtidx={}
+
+evtidx[1] = 0  # CC DIS
+evtidx[2] = 1  # OS DiMu
+evtidx[3] = 2  # LS DiMu
+evtidx[4] = 3  # OS Mu+X
+# -------------------------------------
 
       #0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0
       #0o0o0o0o0o0o0o0o0o0o0---       END USER INPUT      ---0o0o0o0o0o0o0o0o0o0o0
@@ -928,19 +921,21 @@ mctyp[24]='|===        CohPi-         ===|'
       #---------------------------------------------------------------------------
 
 
-      call timestamp('start') --> Print timestamp for program start
+      call timestamp('start') #--> Print timestamp for program start
+
+'''
 
 
       #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-       Check user settings for errors][ and print to file:
-      call check_print_settings(nvar][ncuts][nmc][
-     |                 maxevts][usents][fullnts][runtype][cuthists][
-     |                 norm][datacard][filetag][gtyp][gennt][
-     |                 usecorr2D][usecorrMass][usecorrZeta][
-     |                 formRenorm][iCorr][
-     |                 ndetsec][nncand][nevtyp][
-     |                 detsw][ncndsw][evtsw][
-     |                 ndetsw][nncndsw][nevtsw][ncuthists)
+       Check user settings for errors, and print to file:
+      call check_print_settings(nvar,ncuts,nmc,
+     |                 maxevts,usents,fullnts,runtype,cuthists,
+     |                 norm,datacard,filetag,gtyp,gennt,
+     |                 usecorr2D,usecorrMass,usecorrZeta,
+     |                 formRenorm,iCorr,
+     |                 ndetsec,nncand,nevtyp,
+     |                 detsw,ncndsw,evtsw,
+     |                 ndetsw,nncndsw,nevtsw,ncuthists)
       #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
