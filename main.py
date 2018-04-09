@@ -1,4 +1,8 @@
 from functions import print_zeroth_norms
+from functions import timestamp
+from functions import check_print_settings
+import sys
+
 
 print('\n Starting Heavy Neutrino Analysis')
 
@@ -740,12 +744,12 @@ for ii in range(0, nmc + 1):  # |
 #  CohPi+:                                          |
 # -- RS Model: --                                |
 
-#dname[5, 1] = 'cohpipnuars'  # [NUAGE]              |
+# dname[5, 1] = 'cohpipnuars'  # [NUAGE]              |
 dname[5, 2] = 'cohpipnegrs'  # [NEGLIB]             |
 dname[5, 3] = 'cohpipgen'  # [GENIE]              |
 
 #-- BK Model: --                                |
-#dname[5, 1] = 'cohpipnuabk'  # [NUAGE]            |
+# dname[5, 1] = 'cohpipnuabk'  # [NUAGE]            |
 #-- BS Model: --                                |
 dname[5, 1] = 'cohpipnuabs'  # [NUAGE]            |
 
@@ -759,9 +763,9 @@ for ii in range(4, ntyp + 1):
 dname[9, 1] = 'cohpi0nuars'  # [NUAGE]  |
 dname[9, 2] = 'cohpi0negrs'  # [NEGLIB] |
 #  -- BK Model: --        |
-#dname[9, 1] = 'cohpi0nuabk'  # [NUAGE]|
+# dname[9, 1] = 'cohpi0nuabk'  # [NUAGE]|
 # -- BS Model: --        |
-#dname[9, 1] = 'cohpi0nuabs'  # [NUAGE]|
+# dname[9, 1] = 'cohpi0nuabs'  # [NUAGE]|
 # Use NUAGE BK for GENIE default:     |
 dname[9, 3] = 'cohpi0nuabk'  # [NUAGE]   |
 
@@ -769,27 +773,30 @@ for ii in range(4, ntyp + 1):
     dname[9, ii] = 'NOT ALLOWED'
 
 # ..................................................|
-# Set full NT datacard locations:                  |
+# Set full NT datacard locations:
+
+datacard = {}
 
 for ii in range(0, nmc + 1):  # |
     datacard[ii, 1] = 'datacard/' + dname[ii, gtyp[ii]]
-    #if ii == 16:
-        #datacard[ii, 1] = 'datacard/heavyneutrino'
+    # if ii == 16:
+    #datacard[ii, 1] = 'datacard/heavyneutrino'
 
-        # ..................................................|
-        # ..................................................|
+    # ..................................................|
+    # ..................................................|
 
-        # |-----------------------------------------------|
-        # |-----------------------------------------------|
-        # | Set Datacard Locations [Baby NTs]:            |
-        # |...............................................|
-        # | Initialize locations to full ntuples:         |
+    # |-----------------------------------------------|
+    # |-----------------------------------------------|
+    # | Set Datacard Locations [Baby NTs]:            |
+    # |...............................................|
+    # | Initialize locations to full ntuples:         |
+
+bname = {}
 
 for ii in range(0, nmc + 1):  # |
     datacard[ii, 0] = datacard[ii, 1]  # |
-    #if ii == 16:
-        #datacard[ii, 0] = 'datacard/heavyneutrino'
-
+    # if ii == 16:
+    #datacard[ii, 0] = 'datacard/heavyneutrino'
     for jj in range(1, ntyp + 1):  # |
         bname[ii, jj] = dname[ii, jj]  # |
 
@@ -810,24 +817,25 @@ for ii in range(0, nmc + 1):  # |
     for jj in range(1, ntyp + 1):  # |
         if dstr[ii] != bname[ii, jj]:
             if drep[ii] == 0:  # |
-                bname[ii, jj] = dstr[ii, 1:ldstr] // dtyp[jj]  # |
+                bname[ii, jj] = dstr[ii] + '/' + dtyp[jj]  # |
             elif drep[ii] == 1:  # |
-                bname[ii, jj] = dstr[ii, 1:ldstr]  # |
+                bname[ii, jj] = dstr[ii]  # |
 
          # ...............................................|
          # ...............................................|
 # Set baby NT datacard locations:     |
 for ii in range(0, nmc + 1):      # |
     datacard[ii, 0] = 'datacard/' + bname[ii, gtyp[ii]]  # |
-    #if ii == 16:
-        #datacard[16, 0] = 'datacard/heavyneutrino'
+    # if ii == 16:
+    #datacard[16, 0] = 'datacard/heavyneutrino'
 
-        #   |
-        # ...............................................|
-        # ...............................................|
+    #   |
+    # ...............................................|
+    # ...............................................|
 
    # ************************************
-        # Set output histogram filenames:
+    # Set output histogram filenames:
+filetag = {}
 filetag[0] = 'cohjpsi-mumu_data   '
 filetag[1] = 'cohjpsi-mumu_ccdis  '
 filetag[2] = 'cohjpsi-mumu_ncdis  '
@@ -857,6 +865,7 @@ filetag[24] = 'CohPi-   '
 
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # Screen Output Strings:
+mctyp = {}
 mctyp[0] = '|===        Data           ===|'
 mctyp[1] = '|===        CCDIS          ===|'
 mctyp[2] = '|===        NCDIS          ===|'
@@ -884,30 +893,27 @@ mctyp[23] = '|===  HeavyNeutrino_4.000  ===|'
 mctyp[24] = '|===        CohPi-         ===|'
 
 
-
-
-
 #      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
 # -------------------------------------
- # Set user index values for plotting:
+# Set user index values for plotting:
 # -------------------------------------
-detidx={}
+detidx = {}
 
 detidx[1] = 0  # DC
 detidx[2] = 1  # Other
 detidx[3] = 2  # Coil
 detidx[4] = 3  # Upstream
 # -------------------------------------
-ncndidx={}
+ncndidx = {}
 
-ncndidx[1] = 2 # ncand = 2
-ncndidx[2] = 3 # ncand = 3
-ncndidx[3] = 4 # ncand = 4
-ncndidx[4] = 5 # ncand = {3,4}
+ncndidx[1] = 2  # ncand = 2
+ncndidx[2] = 3  # ncand = 3
+ncndidx[3] = 4  # ncand = 4
+ncndidx[4] = 5  # ncand = {3,4}
 # -------------------------------------
-evtidx={}
+evtidx = {}
 
 evtidx[1] = 0  # CC DIS
 evtidx[2] = 1  # OS DiMu
@@ -915,29 +921,22 @@ evtidx[3] = 2  # LS DiMu
 evtidx[4] = 3  # OS Mu+X
 # -------------------------------------
 
-      #0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0
-      #0o0o0o0o0o0o0o0o0o0o0---       END USER INPUT      ---0o0o0o0o0o0o0o0o0o0o0
-      #0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0
-      #---------------------------------------------------------------------------
+# 0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0
+# 0o0o0o0o0o0o0o0o0o0o0---       END USER INPUT      ---0o0o0o0o0o0o0o0o0o0o0
+# 0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0
+#---------------------------------------------------------------------------
 
+timestamp('start')  # --> Print timestamp for program start
 
-      call timestamp('start') #--> Print timestamp for program start
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# Check user settings for errors, and print to file:
 
+check_print_settings(nvar, ncuts, nmc, maxevts, usents, fullnts, runtype, cuthists,
+                     norm, datacard, filetag, gtyp, gennt, usecorr2D, usecorrMass,
+                     usecorrZeta, formRenorm, iCorr, ndetsec, nncand, nevtyp, detsw,
+                     ncndsw, evtsw, ndetsw, nncndsw, nevtsw, ncuthists)
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 '''
-
-
-      #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-       Check user settings for errors, and print to file:
-      call check_print_settings(nvar,ncuts,nmc,
-     |                 maxevts,usents,fullnts,runtype,cuthists,
-     |                 norm,datacard,filetag,gtyp,gennt,
-     |                 usecorr2D,usecorrMass,usecorrZeta,
-     |                 formRenorm,iCorr,
-     |                 ndetsec,nncand,nevtyp,
-     |                 detsw,ncndsw,evtsw,
-     |                 ndetsw,nncndsw,nevtsw,ncuthists)
-      #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 
       #--------------------------------------
       # Initialize Variables:
@@ -1047,7 +1046,7 @@ evtidx[4] = 3  # OS Mu+X
              print("\n")
              print("\n")
              print'(a31)'       ]['|=============================|'
-             print'(a20][i2][a9)']['|===   Working type '][nttyp][':    ===|'
+             print'(a20][i2][a9)']['|===   Working type ',nttyp,':    ===|'
              print'(a31)'       ][      mctyp(nttyp)
              print'(a31)'       ]['|=============================|'
              print("\n")

@@ -1,0 +1,180 @@
+
+User Settings:
+
+nmc (# of MC components):                  24
+fullnts (full (1) or baby (0) ntuples):     0
+maxevts (# of events to process (0=all)):   0
+usents (# of ntuples to process (0=all)):   0
+nvar (# of variables plotted):             47
+ncuts (# of cuts exacted):                 31
+usecorr2D:                                  0
+usecorrMass:                                0
+usecorrZeta:                                0
+formRenorm:                                 0
+iCorr:                                      1
+-------------------------------------------------
+runtypes (1=run, 0=skip):
+runtype( 0):  0
+runtype( 1):  1
+runtype( 2):  1
+runtype( 3):  1
+runtype( 4):  1
+runtype( 5):  1
+runtype( 6):  1
+runtype( 7):  1
+runtype( 8):  1
+runtype( 9):  1
+runtype(10):  1
+runtype(11):  1
+runtype(12):  1
+runtype(13):  1
+runtype(14):  1
+runtype(15):  1
+runtype(16):  0
+runtype(17):  0
+runtype(18):  0
+runtype(19):  1
+runtype(20):  0
+runtype(21):  0
+runtype(22):  0
+runtype(23):  0
+runtype(24):  1
+-------------------------------------------------
+Datacards used:
+datacard( 1, 0) : datacard/ccbaby/gen 
+datacard( 2, 0) : datacard/ncbaby/gen 
+datacard( 3, 0) : datacard/jpsi-mumu  
+datacard( 4, 0) : datacard/obgbaby    
+datacard( 5, 0) : datacard/cohpip     
+datacard( 6, 0) : datacard/cohrhop    
+datacard( 7, 0) : datacard/amccbaby/gen
+datacard( 8, 0) : datacard/qeccbaby/gen
+datacard( 9, 0) : datacard/cohpi0     
+datacard(10, 0) : datacard/neccbaby/gen
+datacard(11, 0) : datacard/anecc/gen  
+datacard(12, 0) : datacard/anmnc/gen  
+datacard(13, 0) : datacard/cohrho0    
+datacard(14, 0) : datacard/resbaby/gen
+datacard(15, 0) : datacard/cohphi0    
+datacard(19, 0) : datacard/Hnu_1.000  
+datacard(24, 0) : datacard/cohpimin   
+-------------------------------------------------
+MC types used (1=Nuage, 2=Neglib, 3=Genie):      
+              ( 4-7 are permutations)            
+gtyp( 1):  3
+gtyp( 2):  3
+gtyp( 3):  3
+gtyp( 4):  3
+gtyp( 5):  1
+gtyp( 6):  3
+gtyp( 7):  3
+gtyp( 8):  3
+gtyp( 9):  3
+gtyp(10):  3
+gtyp(11):  3
+gtyp(12):  3
+gtyp(13):  3
+gtyp(14):  3
+gtyp(15):  3
+gtyp(19):  3
+gtyp(24):  1
+-------------------------------------------------
+Generated number of MC events in ntuples:        
+gennt( 1):   4116629.00
+gennt( 2):   2451852.25
+gennt( 3):    337363.34
+gennt( 4):         1.00
+gennt( 5):    409103.78
+gennt( 6):    147680.42
+gennt( 7):    384881.81
+gennt( 8):    418257.53
+gennt( 9):    179844.78
+gennt(10):    396271.91
+gennt(11):    193616.45
+gennt(12):    189598.92
+gennt(13):     25235.83
+gennt(14):    934139.81
+gennt(15):      4075.93
+gennt(19):      4500.00
+gennt(24):    824186.44
+-------------------------------------------------
+Normalizations used (norm0 then normTot):
+norm(*, 1): 1440000.000000 1440000.000000
+norm(*, 2): 547200.000000 547200.000000
+norm(*, 3):  29.650000  29.650000
+norm(*, 4):   1.000000   0.220000
+norm(*, 5): 10000.000000 9850.000000
+norm(*, 6): 7380.073801 4937.269373
+norm(*, 7): 36000.000000 36000.000000
+norm(*, 8): 32000.000000 32000.000000
+norm(*, 9): 5000.000000 4925.000000
+norm(*,10): 21600.000000 21600.000000
+norm(*,11): 2160.000000 2160.000000
+norm(*,12): 13680.000000 13680.000000
+norm(*,13): 1000.000000 669.000000
+norm(*,14): 50400.000000 50400.000000
+norm(*,15): 200.000000 200.000000
+norm(*,19): 100.000000 100.000000
+norm(*,24): 2000.000000 2000.000000
+-------------------------------------------------
+cuthists (1=plot for cut, 0=skip:
+cuthists( 1):  0
+cuthists( 2):  0
+cuthists( 3):  0
+cuthists( 4):  0
+cuthists( 5):  0
+cuthists( 6):  0
+cuthists( 7):  0
+cuthists( 8):  0
+cuthists( 9):  0
+cuthists(10):  0
+cuthists(11):  0
+cuthists(12):  0
+cuthists(13):  0
+cuthists(14):  0
+cuthists(15):  0
+cuthists(16):  0
+cuthists(17):  0
+cuthists(18):  0
+cuthists(19):  0
+cuthists(20):  0
+cuthists(21):  0
+cuthists(22):  0
+cuthists(23):  0
+cuthists(24):  0
+cuthists(25):  0
+cuthists(26):  0
+cuthists(27):  0
+cuthists(28):  0
+cuthists(29):  0
+cuthists(30):  0
+cuthists(31):  1
+-------------------------------------------------
+Histogram naming tags:
+filetag( 0): cohjpsi-mumu_data   
+filetag( 1): cohjpsi-mumu_ccdis  
+filetag( 2): cohjpsi-mumu_ncdis  
+filetag( 3): cohjpsi-mumu_jpsi   
+filetag( 4): cohjpsi-mumu_obg    
+filetag( 5): cohjpsi-mumu_cohpip 
+filetag( 6): cohjpsi-mumu_cohrhop
+filetag( 7): cohjpsi-mumu_anumucc
+filetag( 8): cohjpsi-mumu_qe     
+filetag( 9): cohjpsi-mumu_cohpi0 
+filetag(10): cohjpsi-mumu_nuecc  
+filetag(11): cohjpsi-mumu_anuecc 
+filetag(12): cohjpsi-mumu_anumunc
+filetag(13): cohjpsi-mumu_cohrho0
+filetag(14): cohjpsi-mumu_res    
+filetag(15): cohjpsi-mumu_cohphi0
+filetag(16): heavy_neutrino_0.250
+filetag(17): heavy_neutrino_0.350
+filetag(18): heavy_neutrino_0.500
+filetag(19): heavy_neutrino_1.000
+filetag(20): heavy_neutrino_1.500
+filetag(21): heavy_neutrino_2.000
+filetag(22): heavy_neutrino_3.000
+filetag(23): heavy_neutrino_4.000
+filetag(24): CohPi-              
+-------------------------------------------------
+END OF SETTINGS
