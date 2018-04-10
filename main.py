@@ -1,7 +1,7 @@
 from functions import print_zeroth_norms
 from functions import timestamp
 from functions import check_print_settings
-import sys
+from functions import initvar
 
 
 print('\n Starting Heavy Neutrino Analysis')
@@ -936,279 +936,278 @@ check_print_settings(nvar, ncuts, nmc, maxevts, usents, fullnts, runtype, cuthis
                      usecorrZeta, formRenorm, iCorr, ndetsec, nncand, nevtyp, detsw,
                      ncndsw, evtsw, ndetsw, nncndsw, nevtsw, ncuthists)
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+#--------------------------------------
+# Initialize Variables:
+cuts = {}
+initvar(nmc, ncuts, nevtyp, nextyp, nncand, ndetsec, cuts)
+extyp = nextyp * nncndsw * ndetsw
+#--------------------------------------
+
+
+# ......................................................
+# ......................................................
+# Initialize the renormalization factor:
+
+# Read current renorm if not making a new one:
+if formRenorm == 0:
+    f = open('outputs/renorm.txt', 'r')
+    renorm = f.read()
+    f.close()
+
+# If forming renorm, or if not using
+# any correction functions, set the
+# renormalization factor to unity.
+reCounts = {}
+
+if formRenorm == 1 or usecorr2D == 0 and usecorrMass == 0 and usecorrZeta == 0:
+    renorm = 1.0
+
+# Initialize Counts
+for ii in range(1, 3):
+    reCounts[ii] = 0.0
+
+# If forming normalizations run over
+# only the MC component that has
+# correction functions applied, and
+# requires renormalization:
+if formRenorm == 1:
+    for ii in range(0, nmc + 1):
+        runtype[ii] = 0
+    runtype[iCorr] = 1
+
+# ......................................................
+# ......................................................
+
+
+# OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+# OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+# Load Correction Functions and Binnings:
+if runtype[iCorr] == 1:
+
+    # 2D Correction:
+    if usecorr2D == 1:
+
+        # Read Correction:
+        filename = '2ddscorr.txt'
+        read_2dcorr(filename, nbin2Dmass, nbin2Dzeta, DScorr2d)
+
+# Read Equipopulated Binnings:
+        filename = '2d-mass_binning.txt'
+        load_bins(filename, nbin2Dmass, binlim2Dmass)
+        filename = '2d-zeta_binning.txt'
+        load_bins(filename, nbin2Dzeta, binlim2Dzeta)
+
+# --------------------
+# Mass Correction:
+    if usecorrMass == 1:
+        # Read Correction:
+        filename = 'masscorr.txt'
+        read_1dcorr(filename, nbinMass, DScorrMass)
+# Read Equipopulated Binnings:
+        filename = 'mass_binning.txt'
+        load_bins(filename, nbinMass, binlimMass)
+
+# --------------------
+# Zeta Correction:
+    if usecorrZeta == 1:
+        # Read Correction:
+        filename = 'zetacorr.txt'
+        read_1dcorr(filename, nbinZeta, DScorrZeta)
+# Read Equipopulated Binnings:
+        filename = 'zeta_binning.txt'
+        load_bins(filename, nbinZeta, binlimZeta)
+
+
+# OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+# OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+print("\n")
+print("\n")
+print("\n")
+print("0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0")
+print("0o0o0o                             o0o0o0")
+print("0o0o0o      Performing Analysis    o0o0o0")
+print("0o0o0o    And Filling Histograms   o0o0o0")
+print("0o0o0o                             o0o0o0")
+print("0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0")
+print("\n")
+print("\n")
+
 '''
 
-      #--------------------------------------
-      # Initialize Variables:
-       call HLIMIT(nhbook)
-       call initvar(nmc][ncuts][nevtyp][nextyp][nncand][ndetsec][cuts)
-       extyp=nextyp*nncndsw*ndetsw
-      #--------------------------------------
+do nttyp=0,nmc --> Loop over ntuple types (DL-01)
+
+if (runtype(nttyp) == 0) goto 88 --> Skip unwanted NT types
 
 
-      # ......................................................
-      # ......................................................
-      # Initialize the renormalization factor:
+print("\n")
+print("\n")
+print'(a31)'       ,'|=============================|'
+print'(a20,i2,a9)','|===   Working type ',nttyp,':    ===|'
+print'(a31)'       ,      mctyp(nttyp)
+print'(a31)'       ,'|=============================|'
+print("\n")
 
-      # Read current renorm if not making a new one:
-      if(formRenorm.eq.0) then
-       open(22][file='outputs/renorm.txt'][status='old')
-        read(22]['(F12.8)') renorm
-       close(22)
-      endif
-       If forming renorm][ or if not using
-       any correction functions][ set the
-       renormalization factor to unity.
-      if(formRenorm.eq.1.or.
-     | ( usecorr2D  .eq.0 .and.
-     |   usecorrMass.eq.0 .and.
-     |   usecorrZeta.eq.0  )) then
-        renorm=1.0D0
-      endif
-       Initialize Counts
-      do ii=1][2
-        reCounts(ii) = 0.0
-      enddo
-       If forming normalizations run over
-       only the MC component that has
-       correction functions applied][ and
-       requires renormalization:
-      if(formRenorm.eq.1) then
-      do ii=0][nmc
-       runtype(ii) = 0
-      enddo
-      runtype(iCorr)=1
-      endif
-      # ......................................................
-      # ......................................................
+# ----------------------------------------------------------
+# Read Ntuple Location Datacards:
+call FindOpenUnit(UnitNum)
+
+print*,'UnitNum is: ',UnitNum
 
 
-      # OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-      # OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-      # Load Correction Functions and Binnings:
-      if(runtype(iCorr).eq.1) then
-
-        2D Correction:
-       if(usecorr2D.eq.1) then
-          Read Correction:
-         filename='2ddscorr.txt'
-         call read_2dcorr(filename][nbin2Dmass][nbin2Dzeta][DScorr2d)
-          Read Equipopulated Binnings:
-         filename='2d-mass_binning.txt'
-         call load_bins(filename][nbin2Dmass][binlim2Dmass)
-         filename='2d-zeta_binning.txt'
-         call load_bins(filename][nbin2Dzeta][binlim2Dzeta)
-       endif
-       # --------------------
-        # Mass Correction:
-       if(usecorrMass.eq.1) then
-          Read Correction:
-         filename='masscorr.txt'
-         call read_1dcorr(filename][nbinMass][DScorrMass)
-          Read Equipopulated Binnings:
-         filename='mass_binning.txt'
-         call load_bins(filename][nbinMass][binlimMass)
-       endif
-       # --------------------
-        # Zeta Correction:
-       if(usecorrZeta.eq.1) then
-          # Read Correction:
-         filename='zetacorr.txt'
-         call read_1dcorr(filename][nbinZeta][DScorrZeta)
-          # Read Equipopulated Binnings:
-         filename='zeta_binning.txt'
-         call load_bins(filename][nbinZeta][binlimZeta)
-       endif
-
-      endif
-     # OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-     # OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
-
-      print("\n")
-      print("\n")
-      print("\n")
-      print("0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0")
-      print("0o0o0o                             o0o0o0")
-      print("0o0o0o      Performing Analysis    o0o0o0")
-      print("0o0o0o    And Filling Histograms   o0o0o0")
-      print("0o0o0o                             o0o0o0")
-      print("0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0")
-      print("\n")
-      print("\n")
+print*,'Datacard is: ',datacard(nttyp,fullnts)
 
 
-
-      do nttyp=0][nmc --> Loop over ntuple types (DL-01)
-
-         if (runtype(nttyp).eq.0) goto 88 --> Skip unwanted NT types
-
-
-             print("\n")
-             print("\n")
-             print'(a31)'       ]['|=============================|'
-             print'(a20][i2][a9)']['|===   Working type ',nttyp,':    ===|'
-             print'(a31)'       ][      mctyp(nttyp)
-             print'(a31)'       ]['|=============================|'
-             print("\n")
-
-          # ----------------------------------------------------------
-            # Read Ntuple Location Datacards:
-            call FindOpenUnit(UnitNum)
-
-            print*]['UnitNum is: '][UnitNum
-
-
-            print*]['Datacard is: '][datacard(nttyp][fullnts)
-
-
-            open(UnitNum][file=datacard(nttyp][fullnts)][status='old')
-            read(UnitNum][*) ntnum
-            if(ntnum.gt.MaxNTS) then
-             call printerror(1][482773842]['main.F              ')
-             print*]['Too many ntuples. Increse ntname size.'
-             print*]['(MaxNTS is too small)'
-             print*]['ntnum: '][ntnum
-             print*]['nttyp: '][nttyp
-             print*]['MaxNTS: '][MaxNTS
-             print*]['Datacard: '][datacard(nttyp][fullnts)
-             print("\n")
-             stop
-            endif
-            do ii=1][ntnum
-              read(UnitNum][55) ntname(ii)
-            enddo
-            close(UnitNum)
+open(UnitNum,file=datacard(nttyp,fullnts),status='old')
+read(UnitNum,*) ntnum
+if ntnum.gt.MaxNTS) then
+call printerror(1,482773842,'main.F              ')
+print*,'Too many ntuples. Increse ntname size.'
+print*,'(MaxNTS is too small)'
+print*,'ntnum: ',ntnum
+print*,'nttyp: ',nttyp
+print*,'MaxNTS: ',MaxNTS
+print*,'Datacard: ',datacard(nttyp,fullnts)
+print("\n")
+stop
+endif
+do ii=1,ntnum
+read(UnitNum,55) ntname(ii)
+enddo
+close(UnitNum)
 55          format(a100)
-            Change the number of ntuples to be read if desired:
-            if(usents.gt.0 .and. usents.lt.ntnum) ntnum = usents
-         #  ----------------------------------------------------------
+Change the number of ntuples to be read if desired:
+if usents.gt.0  and   usents.lt.ntnum) ntnum = usents
+#  ----------------------------------------------------------
 
 
-         #  ---------------------------------------------------------
-            Open output histogram file and book histograms:
-             length=LEN_TRIM(filetag(nttyp))
-             call FindOpenUnit(hfileID)
-             call hropen(hfileID]['OUTPUT']['outputs/hbook/'//
-     |                  filetag(nttyp)(1:length)//'.h']['N'][1024][istat)
-             call hcdir('//OUTPUT'][' ')
-              Histogram Booking:
-             call bookhistos(nvar][extyp][ncuts][zetaS][nbintyp][cuthists][
-     |                 ndetsec][nncand][nevtyp][nextyp][
-     |                 detsw][ncndsw][evtsw][
-     |                 ndetsw][nncndsw][nevtsw][ncuthists][
-     |                 detidx][ncndidx][evtidx)
-         #  ---------------------------------------------------------
+#  ---------------------------------------------------------
+Open output histogram file and book histograms:
+length=LEN_TRIM(filetag(nttyp))
+call FindOpenUnit(hfileID)
+call hropen(hfileID,'OUTPUT','outputs/hbook/'//
+|                  filetag(nttyp)(1:length)//'.h','N',1024,istat)
+call hcdir('//OUTPUT',' ')
+Histogram Booking:
+call bookhistos(nvar,extyp,ncuts,zetaS,nbintyp,cuthists,
+|                 ndetsec,nncand,nevtyp,nextyp,
+|                 detsw,ncndsw,evtsw,
+|                 ndetsw,nncndsw,nevtsw,ncuthists,
+|                 detidx,ncndidx,evtidx)
+#  ---------------------------------------------------------
 
 
-         #  ooooooooooooooooooooooooooooooooooooooooo
-            Open event picture printout files:
-             if (nttyp.eq.0.and.evtpicsw.eq.1)
-     |                      call openevtpic(evtID][1)
-         #  ooooooooooooooooooooooooooooooooooooooooo
+#  ooooooooooooooooooooooooooooooooooooooooo
+Open event picture printout files:
+if (nttyp == 0 and  evtpicsw == 1)
+|                      call openevtpic(evtID,1)
+#  ooooooooooooooooooooooooooooooooooooooooo
 
 
 
-       do ifile=1][ntnum --> Loop over Ntuples (DL-02)
+do ifile=1,ntnum --> Loop over Ntuples (DL-02)
 
 
-        #    ------------------------
-             Set NT header ID
-             1000 for Full Ntuples
-             501 for Baby Ntuples
-            id = 500
+#    ------------------------
+Set NT header ID
+1000 for Full Ntuples
+501 for Baby Ntuples
+id = 500
 
-            if(fullnts.eq.0      .and.
-     |         datacard(nttyp][0).ne.
-     |         datacard(nttyp][1) )
-     |      id=501
-        #    ------------------------
+if fullnts == 0       and
+|         datacard(nttyp,0) !=
+|         datacard(nttyp,1) )
+|      id=501
+#    ------------------------
 
-        #    ------------------------------------------------------
-             Open Ntuple:
-            call FindOpenUnit(ntID)
-            call openntuple(ntID][ntname(ifile)][id)
- 67         format(1a1][' Working on file '][I3][' of '][I3][': '][a100][$)
-            if(ifile.eq.1) print("\n")
-            Refresh line:
-            print 67][ char(13)][ifile][ntnum][ntname(ifile)
-            if(ifile.eq.ntnum) print("\n")
-            call hnoent(id][nevents) --> Get # of events in NT
-             Change the number of event if desired:
-            if(maxevts.gt.0.and.maxevts.lt.nevents) nevents=maxevts
-        #    ------------------------------------------------------
-
-
-        do ievent = 1][nevents   Loop over Events of an Ntuple (DL-03)
+#    ------------------------------------------------------
+Open Ntuple:
+call FindOpenUnit(ntID)
+call openntuple(ntID,ntname(ifile),id)
+67         format(1a1,' Working on file ',I3,' of ',I3,': ',a100,$)
+if ifile == 1) print("\n")
+Refresh line:
+print 67, char(13),ifile,ntnum,ntname(ifile)
+if ifile == ntnum) print("\n")
+call hnoent(id,nevents) --> Get # of events in NT
+Change the number of event if desired:
+if maxevts.gt.0 and  maxevts.lt.nevents) nevents=maxevts
+#    ------------------------------------------------------
 
 
-          call checkeventerr(id][ievent][err) --> Returns err=0 if OK
-          if (err.ne.0) goto 77
+do ievent = 1,nevents   Loop over Events of an Ntuple (DL-03)
 
 
-        # ============================================================
-        # ````````````````````````````````````````````````````````````
-          Impose Cuts and Fill Histograms
-          call process_event(nmc][nttyp][extyp][nvar][ncuts][
-     |                ndetsec][nncand][nevtyp][nextyp][
-     |                cuts][norm][
-     |                nttypobg][zetaS][cuthists][nbintyp][
-     |                usecorr2D][nbin2Dmass][nbin2Dzeta][DScorr2D][
-     |                binlim2Dmass][binlim2Dzeta][
-     |                usecorrMass][nbinMass][DScorrMass][binlimMass][
-     |                usecorrZeta][nbinZeta][DScorrZeta][binlimZeta][
-     |                formRenorm][renorm][reCounts][iCorr][evtID][
-     |                detsw][ncndsw][evtsw][extrapsw][evtpicsw)
-        # ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-        # ============================================================
+call checkeventerr(id,ievent,err) --> Returns err=0 if OK
+if (err != 0) goto 77
+
+
+# ============================================================
+# ````````````````````````````````````````````````````````````
+Impose Cuts and Fill Histograms
+call process_event(nmc,nttyp,extyp,nvar,ncuts,
+|                ndetsec,nncand,nevtyp,nextyp,
+|                cuts,norm,
+|                nttypobg,zetaS,cuthists,nbintyp,
+|                usecorr2D,nbin2Dmass,nbin2Dzeta,DScorr2D,
+|                binlim2Dmass,binlim2Dzeta,
+|                usecorrMass,nbinMass,DScorrMass,binlimMass,
+|                usecorrZeta,nbinZeta,DScorrZeta,binlimZeta,
+|                formRenorm,renorm,reCounts,iCorr,evtID,
+|                detsw,ncndsw,evtsw,extrapsw,evtpicsw)
+# ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+# ============================================================
 
 
 77      continue --> Skip bad events
-        enddo --> Loop over Events (DL-03)
+enddo --> Loop over Events (DL-03)
 
-            call closentuple(ntID) --> Close ntuple
+call closentuple(ntID) --> Close ntuple
 
-       enddo --> Loop over Ntuples (DL-02)
+enddo --> Loop over Ntuples (DL-02)
 
 
-      #-----------------------------
-       Close output histogram file
-       call hcdir('//OUTPUT'][' ')
-       call hrout(0][icycle][' ')
-       call hrend('OUTPUT')
-       close(hfileID)
-       call hdelet(0)
-      #-----------------------------
+#-----------------------------
+Close output histogram file
+call hcdir('//OUTPUT',' ')
+call hrout(0,icycle,' ')
+call hrend('OUTPUT')
+close(hfileID)
+call hdelet(0)
+#-----------------------------
 
-      #ooooooooooooooooooooooooooooooooooooooooo
-       Close event picture printout files:
-        if (nttyp.eq.0.and.evtpicsw.eq.1) then
-           Close run/evt file:
-          close(evtID(1))
-          call closeevtpic(evtID)
-        endif
-      #ooooooooooooooooooooooooooooooooooooooooo
+#ooooooooooooooooooooooooooooooooooooooooo
+Close event picture printout files:
+if (nttyp == 0 and  evtpicsw == 1) then
+Close run/evt file:
+close(evtID(1))
+call closeevtpic(evtID)
+endif
+#ooooooooooooooooooooooooooooooooooooooooo
 
-       Print Cut Table:
-      call cut_table(nmc][filetag][ttag][ncuts][
-     |           nevtyp][nextyp][nncand][ndetsec][
-     |           detsw][ncndsw][evtsw][cuts][norm][nttyp)
+Print Cut Table:
+call cut_table(nmc,filetag,ttag,ncuts,
+|           nevtyp,nextyp,nncand,ndetsec,
+|           detsw,ncndsw,evtsw,cuts,norm,nttyp)
 
 
 
 88    continue --> Skip unwanted event types
-      enddo --> Loop over ntuple types (DL-01)
+enddo --> Loop over ntuple types (DL-01)
 
-       Print renormalization factor:
-      if (formRenorm.eq.1) call print_renorms(reCounts)
+Print renormalization factor:
+if (formRenorm == 1) call print_renorms(reCounts)
 
 
-      call timestamp('stop ') #--> Print timestamp for program end
-      print("\n")
-      print("\n")
-      print('**********************')
-      print('***    JOB DONE    ***')
-      print('**********************')
-      print("\n")
-      print("\n")
+call timestamp('stop ') #--> Print timestamp for program end
+print("\n")
+print("\n")
+print('**********************')
+print('***    JOB DONE    ***')
+print('**********************')
+print("\n")
+print("\n")
 
 '''

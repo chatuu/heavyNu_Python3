@@ -41,7 +41,7 @@ def printerror(typ, id, filename):
     #        (9 or fewer digits)
     # filename --> name of subroutine calling printerror
     #=======================================#
-    # Check input                           #
+    # Check input
     if typ != 1 and typ != 2:
         print('\n')
         print('\n')
@@ -134,223 +134,221 @@ def check_print_settings(nvar, ncuts, nmc, maxevts, usents, fullnts, runtype, cu
 
     #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>!
     # Check user input for errors:                                    !
-    if nvar < 1 or nvar > 99:                                  #
-        printerror(1, 677854432, 'main.F')              #
+    if nvar < 1 or nvar > 99:
+        printerror(1, 677854432, 'main.F')
         print('nvar out of range: ' + str(nvar)
-              )                                #
-        print('Must modify histogram booking for nvar>99')               #
-        print('')                                                        #
+              )
+        print('Must modify histogram booking for nvar>99')
+        print('')
         #
         sys.exit('Program Quit..!')
 
-    if ncuts < 1:                                              #
-        printerror(1, 577483986, 'main.F')              #
+    if ncuts < 1:
+        printerror(1, 577483986, 'main.F')
         print('ncuts out of range: ' + str(ncuts)
-              )                              #
-        print('')                                                        #
+              )
+        print('')
         #
         sys.exit('Program Quit..!')
 
-    if nmc < 1:                                                #
-        printerror(1, 229388471, 'main.F')              #
+    if nmc < 1:
+        printerror(1, 229388471, 'main.F')
         print('nmc out of range: ' + str(nmc)
-              )                                  #
+              )
         #
         sys.exit('Program Quit..!')
         #
-    if maxevts < 0:                                             #
-        printerror(1, 847711119, 'main.F')              #
+    if maxevts < 0:
+        printerror(1, 847711119, 'main.F')
         print('maxevts out of range: ' + str(maxevts)
-              )                          #
+              )
         #
         sys.exit('Program Quit..!')
         #
-    if usents < 0:                                              #
-        printerror(1, 111992854, 'main.F')              #
+    if usents < 0:
+        printerror(1, 111992854, 'main.F')
         print('usents out of range: ' + str(usents)
-              )                            #
+              )
         #
         sys.exit('Program Quit..!')
         #
-    if fullnts != 1 and fullnts != 0:                            #
-        printerror(1, 222999331, 'main.F')              #
+    if fullnts != 1 and fullnts != 0:
+        printerror(1, 222999331, 'main.F')
         print('fullnts out of range: ' + str(fullnts)
-              )                          #
-        print('\n')                                                        #
+              )
+        print('\n')
         #
         sys.exit('Program Quit..!')
         #
-    for ii in range(0, nmc + 1):                                                       #
-        if runtype[ii] != 1 and runtype[ii] != 0:                    #
-            printerror(1, 122211847, 'main.F')              #
-            print('runtype out of range#')                                   #
+    for ii in range(0, nmc + 1):
+        if runtype[ii] != 1 and runtype[ii] != 0:
+            printerror(1, 122211847, 'main.F')
+            print('runtype out of range#')
             print('ii, runtype[ii]: ' + str(ii) + ' ' +
-                  str(runtype[ii]))                    #
-            #
+                  str(runtype[ii]))
+
             print('\n')
-            #
+
             sys.exit('Program Quit..!')
-            #
-    for ii in range(1, ncuts + 1):                                                     #
-        if cuthists[ii] != 1 and cuthists[ii] != 0:                  #
-            printerror(1, 448833001, 'main.F')              #
-            print('cuthists out of range#')                                  #
+
+    for ii in range(1, ncuts + 1):
+        if cuthists[ii] != 1 and cuthists[ii] != 0:
+            printerror(1, 448833001, 'main.F')
+            print('cuthists out of range#')
             print('ii, cuthists[ii]: ' + str(ii) + ' ' +
-                  str(cuthists[ii]))                  #
-            #
+                  str(cuthists[ii]))
+
             sys.exit('Program Quit..!')
-            #
-    for ii in range(0, 2):                                                         #
-        for jj in range(0, nmc + 1):                                                       #
-            if norm[ii, jj] < 0.0:                                     #
-                printerror(1, 687775921, 'main.F')              #
-                #
+
+    for ii in range(0, 2):
+        for jj in range(0, nmc + 1):
+            if norm[ii, jj] < 0.0:
+                printerror(1, 687775921, 'main.F')
+
                 print('norm out of range#')
                 print('ii, jj, norm(ii,jj): ' + str(ii) + ' ' +
-                      str(jj) + ' ' + str(norm[ii, jj]))         #
-                #
+                      str(jj) + ' ' + str(norm[ii, jj]))
+
                 print('\n')
-                #
+
                 sys.exit('Program Quit..!')
 
-    for ii in range(0, nmc + 1):                                                       #
-        if gtyp[ii] < 1 or gtyp[ii] > 7:                           #
-            printerror(1, 668740012, 'main.F')              #
-            print('gtyp out of range#')                                      #
+    for ii in range(0, nmc + 1):
+        if gtyp[ii] < 1 or gtyp[ii] > 7:
+            printerror(1, 668740012, 'main.F')
+            print('gtyp out of range#')
             print('ii, gtyp[ii]: ' + str(ii) + ' ' +
-                  str(gtyp[ii]))                          #
-            #
+                  str(gtyp[ii]))
+
             print('\n')
-            #
+
             sys.exit('Program Quit..!')
 
-    for ii in range(1, nmc + 1):                                                       #
-        if gennt[ii, gtyp[ii]] < 0.0:                              #
-            printerror(1, 100029837, 'main.F')              #
-            print('gennt out of range#')                                     #
+    for ii in range(1, nmc + 1):
+        if gennt[ii, gtyp[ii]] < 0.0:
+            printerror(1, 100029837, 'main.F')
+            print('gennt out of range#')
             print('ii, gtyp[ii]: ' + str(ii) + ' ' +
-                  str(gtyp[ii]))                          #
+                  str(gtyp[ii]))
             print('gennt(' + str(ii) + ',' +
-                  str(gtyp[ii]) + '): ' + str(gennt[ii, gtyp[ii]]))         #
-            #
+                  str(gtyp[ii]) + '): ' + str(gennt[ii, gtyp[ii]]))
+
             print('\n')
-            #
+
             sys.exit('Program Quit..!')
 
-    if usecorr2D != 0 and usecorr2D != 1:                        #
-        printerror(1, 774665367, 'main.F')              #
+    if usecorr2D != 0 and usecorr2D != 1:
+        printerror(1, 774665367, 'main.F')
         print('usecorr2D out of range: ' +
-              str(usecorr2D))                      #
+              str(usecorr2D))
         #
         sys.exit('Program Quit..!')
         #
-    if usecorrMass != 0 and usecorrMass != 1:                    #
-        printerror(1, 111982763, 'main.F')              #
+    if usecorrMass != 0 and usecorrMass != 1:
+        printerror(1, 111982763, 'main.F')
         print('usecorrMass out of range: ' +
-              str(usecorrMass))                  #
+              str(usecorrMass))
         #
         sys.exit('Program Quit..!')
         #
-    if usecorrZeta != 0 and usecorrZeta != 1:                    #
-        printerror(1, 222988777, 'main.F')              #
+    if usecorrZeta != 0 and usecorrZeta != 1:
+        printerror(1, 222988777, 'main.F')
         print('usecorrZeta out of range: ' +
-              str(usecorrZeta))                  #
+              str(usecorrZeta))
         #
         sys.exit('Program Quit..!')
         #
-    if formRenorm != 0 and formRenorm != 1:                      #
-        printerror(1, 229938000, 'main.F')              #
+    if formRenorm != 0 and formRenorm != 1:
+        printerror(1, 229938000, 'main.F')
         print('formRenorm out of range: ' +
-              str(formRenorm))                    #
+              str(formRenorm))
         #
         sys.exit('Program Quit..!')
         #
-    if iCorr < 0 or iCorr > nmc:                               #
-        printerror(1, 228837641, 'main.F')              #
+    if iCorr < 0 or iCorr > nmc:
+        printerror(1, 228837641, 'main.F')
         print('iCorr out of range: ' + str(iCorr)
-              )                              #
+              )
         #
         sys.exit('Program Quit..!')
         #
-    if ndetsec < 1:                                             #
-        printerror(1, 487652108, 'main.F')              #
+    if ndetsec < 1:
+        printerror(1, 487652108, 'main.F')
         print('ndetsec out of range: ' + str(ndetsec)
-              )                          #
-        print('\n')                                                        #
+              )
+        print('\n')
         #
         sys.exit('Program Quit..!')
         #
-    for ii in range(1, ndetsec + 1):                                                   #
-        if detsw[ii] != 1 and detsw[ii] != 0:                        #
-            printerror(1, 115458857, 'main.F')              #
-            print('detsw out of range#')                                     #
+    for ii in range(1, ndetsec + 1):
+        if detsw[ii] != 1 and detsw[ii] != 0:
+            printerror(1, 115458857, 'main.F')
+            print('detsw out of range#')
             print('ii, detsw[ii]: ' + str(ii) + ' ' +
-                  str(detsw[ii]))                        #
+                  str(detsw[ii]))
             sys.exit('Program Quit..!')
-            #
-    if ndetsw < 1:                                              #
-        printerror(1, 909087623, 'main.F')              #
+
+    if ndetsw < 1:
+        printerror(1, 909087623, 'main.F')
         print('ndetsw out of range: ' + str(ndetsw)
-              )                            #
-        print('\n')                                                        #
+              )
+        print('\n')
         #
         sys.exit('Program Quit..!')
         #
-    if nncand < 1:                                              #
-        printerror(1, 228327738, 'main.F')              #
+    if nncand < 1:
+        printerror(1, 228327738, 'main.F')
         print('nncand out of range: ' + str(nncand)
-              )                            #
-        print('\n')                                                        #
+              )
+        print('\n')
         sys.exit('Program Quit..!')
         #
-    for ii in range(1, nncand + 1):                                                    #
-        if ncndsw[ii] != 1 and ncndsw[ii] != 0:                      #
-            printerror(1, 3994881, 'main.F')              #
-            print('ncndsw out of range#')                                    #
+    for ii in range(1, nncand + 1):
+        if ncndsw[ii] != 1 and ncndsw[ii] != 0:
+            printerror(1, 3994881, 'main.F')
+            print('ncndsw out of range#')
             print('ii, ncndsw[ii]: ' + str(ii) + ' ' +
-                  str(ncndsw[ii]))                      #
+                  str(ncndsw[ii]))
         #
             sys.exit('Program Quit..!')
-            #
-            #
-    if nncndsw < 1:                                             #
-        printerror(1, 98768761, 'main.F')              #
+
+    if nncndsw < 1:
+        printerror(1, 98768761, 'main.F')
         print('nncndsw out of range: ' + str(nncndsw)
-              )                          #
-        print('\n')                                                        #
+              )
+        print('\n')
         sys.exit('Program Quit..!')
         #
-    if nevttyp < 1:                                             #
-        printerror(1, 333728875, 'main.F')              #
+    if nevttyp < 1:
+        printerror(1, 333728875, 'main.F')
         print('nevttyp out of range: ' + str(nevttyp)
-              )                          #
-        print('\n')                                                        #
+              )
+        print('\n')
         #
         sys.exit('Program Quit..!')
         #
-    for ii in range(1, nevttyp + 1):                                                   #
-        if evtsw[ii] != 1 and evtsw[ii] != 0:                        #
-            printerror(1, 577462198, 'main.F')              #
-            print('evtsw out of range#')                                     #
+    for ii in range(1, nevttyp + 1):
+        if evtsw[ii] != 1 and evtsw[ii] != 0:
+            printerror(1, 577462198, 'main.F')
+            print('evtsw out of range#')
             print('ii, evtsw[ii]: ' + str(ii) + ' ' +
-                  str(evtsw[ii]))                        #
+                  str(evtsw[ii]))
         #
             sys.exit('Program Quit..!')
-            #
-            #
-    if nevtsw < 1:                                              #
-        printerror(1, 577648910, 'main.F')              #
+
+    if nevtsw < 1:
+        printerror(1, 577648910, 'main.F')
         print('nevtsw out of range: ' + str(nevtsw)
-              )                            #
-        print('\n')                                                        #
+              )
+        print('\n')
         #
         sys.exit('Program Quit..!')
         #
-    if ncuthists < 1:                                           #
-        printerror(1, 222938816, 'main.F')              #
+    if ncuthists < 1:
+        printerror(1, 222938816, 'main.F')
         print('ncuthists out of range: ' +
-              str(ncuthists))                      #
-        print('\n')                                                        #
+              str(ncuthists))
+        print('\n')
         #
         sys.exit('Program Quit..!')
         #
@@ -415,7 +413,7 @@ def check_print_settings(nvar, ncuts, nmc, maxevts, usents, fullnts, runtype, cu
     for ii in range(0, nmc + 1):
         if runtype[ii] != 0:
             f.write('\n{:9s}{:2d}{:1s}{:2d}{:4s}{:20s}'.format('datacard(', ii, ',', fullnts, ') : ',
-                                                                  datacard[ii, fullnts]))
+                                                               datacard[ii, fullnts]))
     f.write('\n-------------------------------------------------')
     f.write('\nMC types used (1=Nuage, 2=Neglib, 3=Genie):      ')
     f.write('\n              ( 4-7 are permutations)            ')
@@ -439,7 +437,7 @@ def check_print_settings(nvar, ncuts, nmc, maxevts, usents, fullnts, runtype, cu
     for ii in range(0, nmc + 1):
         if runtype[ii] != 0:
             f.write('\n{:7s}{:2d}{:3s}{:10.6f}{:1s}{:10.6f}'.format('norm(*,', ii, '): ', norm[0, ii],
-                                                                       ' ', norm[1, ii]))
+                                                                    ' ', norm[1, ii]))
 
     f.write('\n-------------------------------------------------')
     f.write('\ncuthists (1=plot for cut, 0=skip:')
@@ -457,4 +455,41 @@ def check_print_settings(nvar, ncuts, nmc, maxevts, usents, fullnts, runtype, cu
 
     f.write('\n-------------------------------------------------')
     f.write('\nEND OF SETTINGS')
+    f.close()
+
+
+def initvar(nmc, ncuts, nevtyp, nextyp, nncand, ndetsec, cuts):
+
+    for ii in range(1, 4):
+        for jj in range(1, ncuts + 1):
+            for kk in range(0, nmc + 1):
+                for ll in range(1, nevtyp + 1):
+                    for mm in range(1, nextyp + 1):
+                        for nn in range(1, nncand + 1):
+                            for oo in range(1, ndetsec + 1):
+                                cuts[ii, jj, kk, ll, mm, nn, oo] = 0.
+
+
+def read_2dcorr(filename, nbin1, nbin2, Corr):
+
+    f = open('corr/corrections/' + filename, 'r')
+    for ii in range(1, nbin1 + 1):
+        for jj in range(1, nbin2 + 1):
+            Corr[ii, jj] = f.read()
+    f.close()
+
+
+def load_bins(filename, nbin, binnings):
+
+    f = open('corr/binnings/' + filename, 'r')
+    for ii in range(1, nbin + 2):
+        binnings[ii] = f.read()
+    f.close()
+
+
+def read_1dcorr(filename, nbin, Corr):
+
+    f = open('corr/corrections/' + filename, 'r')
+    for ii in range(1, nbin + 1):
+        Corr[ii] = f.read()
     f.close()
